@@ -46,4 +46,4 @@ Thanks to JacksonSoft for their [custom tab control](https://www.codeproject.com
 # ⚖ License
 This project is licensed under the GPLv3 license
 <br>
-You may refer to the "LICENSE" file for more information
+You may refer to the "LICENSE.txt" file for more information, that file includes what you can and can't do with this project.
