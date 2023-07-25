@@ -8,16 +8,18 @@ namespace PintoNS.Networking
 {
     public class NetworkManager
     {
+        private LoginForm loginForm;
         private MainForm mainForm;
         public NetworkClient NetClient;
         public NetworkHandler NetHandler;
         public bool IsActive;
 
-        public NetworkManager(MainForm mainForm)
+        public NetworkManager(LoginForm loginForm, MainForm mainForm)
         {
+            this.loginForm = loginForm;
             this.mainForm = mainForm;
             NetClient = new NetworkClient();
-            NetHandler = new NetworkHandler(mainForm, NetClient);
+            NetHandler = new NetworkHandler(loginForm, mainForm, NetClient);
             IsActive = true;
 
             NetClient.ReceivedPacket = delegate (IPacket packet)
@@ -33,8 +35,7 @@ namespace PintoNS.Networking
 
         public async Task<(bool, Exception)> Connect(string ip, int port)
         {
-            (bool, Exception) connectResult = await NetClient.Connect(ip, port);
-            return connectResult;
+            return await NetClient.Connect(ip, port);
         }
 
         public void Disconnect(string reason)
@@ -43,36 +44,14 @@ namespace PintoNS.Networking
                 NetClient.Disconnect(reason);
             NetClient = null;
             NetHandler = null;
+            loginForm = null;
             mainForm = null;
             IsActive = false;
         }
 
-        public void Login(string username, string password) 
+        public void Login(string token) 
         {
-            string passwordHash = BitConverter.ToString(
-                new SHA256Managed()
-                .ComputeHash
-                (Encoding
-                .UTF8
-                .GetBytes(password)))
-                .Replace("-", "")
-                .ToUpper();
-            NetHandler.SendLoginPacket(Program.PROTOCOL_VERSION, 
-                Program.VERSION_STRING, username, passwordHash);
-        }
-
-        public void Register(string username, string password)
-        {
-            string passwordHash = BitConverter.ToString(
-                new SHA256Managed()
-                .ComputeHash
-                (Encoding
-                .UTF8
-                .GetBytes(password)))
-                .Replace("-", "")
-                .ToUpper();
-            NetHandler.SendRegisterPacket(Program.PROTOCOL_VERSION,
-                Program.VERSION_STRING, username, passwordHash);
+            NetHandler.SendLoginPacket(Program.PROTOCOL_VERSION, Program.VERSION_STRING, token);
         }
 
         public void ChangeStatus(UserStatus status, string motd) 
@@ -94,11 +73,11 @@ namespace PintoNS.Networking
 
             if (!reason.Equals("User requested disconnect")) 
             {
-                mainForm.Invoke(new Action(() =>
+                loginForm.Invoke(new Action(() =>
                 {
-                    mainForm.Disconnect();
+                    loginForm.Disconnect();
                     if (!NetHandler.LoggedIn && wasActive)
-                        MsgBox.Show(mainForm, reason, "Error", MsgBoxIconType.ERROR);
+                        MsgBox.Show(loginForm, reason, "Error", MsgBoxIconType.ERROR);
                 }));
             }
 

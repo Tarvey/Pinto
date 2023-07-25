@@ -129,20 +129,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Assets.resx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ExRichTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Header.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Header.Designer.cs">
-      <DependentUpon>Header.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Loader.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Loader.Designer.cs">
       <DependentUpon>Loader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoginButton.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MenuButton.cs">
       <SubType>Component</SubType>
@@ -152,9 +146,6 @@
     </Compile>
     <Compile Include="Controls\ModernTextBox.Designer.cs">
       <DependentUpon>ModernTextBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NoFocusQueButton.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Separator.cs">
       <SubType>Component</SubType>
@@ -253,17 +244,11 @@
     <Compile Include="Networking\BinaryWriterReaderExtensions.cs" />
     <Compile Include="Networking\NetworkManager.cs" />
     <Compile Include="General\ContactsManager.cs" />
-    <Compile Include="Forms\UsingPintoForm.cs">
+    <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UsingPintoForm.Designer.cs">
-      <DependentUpon>UsingPintoForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\MessageForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MessageForm.Designer.cs">
-      <DependentUpon>MessageForm.cs</DependentUpon>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Logo.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -302,7 +287,6 @@
     <Compile Include="Networking\Packets\PacketRemoveContact.cs" />
     <Compile Include="Networking\Packets\PacketInWindowPopup.cs" />
     <Compile Include="Networking\Packets\PacketAddContact.cs" />
-    <Compile Include="Networking\Packets\PacketRegister.cs" />
     <Compile Include="Networking\Packets\PacketMessage.cs" />
     <Compile Include="Networking\Packets\PacketLogout.cs" />
     <Compile Include="Networking\Packets\PacketLogin.cs" />
@@ -388,17 +372,14 @@
     <EmbeddedResource Include="Forms\ServerListForm.resx">
       <DependentUpon>ServerListForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UsingPintoForm.resx">
-      <DependentUpon>UsingPintoForm.cs</DependentUpon>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FatalErrorForm.resx">
       <DependentUpon>FatalErrorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InWindowPopupControl.resx">
       <DependentUpon>InWindowPopupControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MessageForm.resx">
-      <DependentUpon>MessageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ViewAllPopupContentForm.resx">
       <DependentUpon>ViewAllPopupContentForm.cs</DependentUpon>
@@ -3422,9 +3403,12 @@
     <Content Include="Resources\Assets\9703.png" />
     <Content Include="Resources\Assets\9705.png" />
     <Content Include="Resources\Assets\9706.png" />
+    <Content Include="Resources\Assets\LoginButtonHovered.png" />
+    <Content Include="Resources\Assets\LoginButtonClicked.png" />
+    <Content Include="Resources\Assets\LoginButtonDisabled.png" />
+    <Content Include="Resources\Assets\LoginButtonEnabled.png" />
     <Content Include="Resources\HTML\PINTO_NEWS_ERROR.html" />
     <Content Include="Resources\Logo\Banner.png" />
-    <Content Include="Resources\Logo\LOADING.png" />
     <Content Include="Resources\Logo\LOGO.ico" />
     <Content Include="Resources\Logo\LOGO.png" />
     <Content Include="Resources\Logo\LOGO_BACKGROUND.png" />
@@ -3463,11 +3447,6 @@
     <Content Include="Resources\Statuses\BUSY.ico" />
     <Content Include="Resources\Statuses\BUSY.png" />
     <Content Include="Resources\Statuses\CONNECTING.gif" />
-    <Content Include="Resources\Statuses\CONNECTING_0.ico" />
-    <Content Include="Resources\Statuses\CONNECTING_2.ico" />
-    <Content Include="Resources\Statuses\CONNECTING_4.ico" />
-    <Content Include="Resources\Statuses\CONNECTING_6.ico" />
-    <Content Include="Resources\Statuses\CONNECTING_8.ico" />
     <Content Include="Resources\Statuses\INVISIBLE.ico" />
     <Content Include="Resources\Statuses\INVISIBLE.png" />
     <Content Include="Resources\Statuses\OFFLINE.ico" />

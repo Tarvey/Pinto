@@ -40,6 +40,7 @@ namespace PintoNS
             this.tsmiMenuBarFileChangeStatusAway = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMenuBarFileChangeStatusBusy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMenuBarFileChangeStatusInvisible = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMenuBarFileChangeStatusOffline = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiMenuBarFileLogOff = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -62,14 +63,13 @@ namespace PintoNS
             this.tsmiTrayChangeStatusAway = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayChangeStatusBusy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayChangeStatusInvisible = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTrayChangeStatusOffline = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrayExit = new System.Windows.Forms.ToolStripMenuItem();
             this.scSections = new System.Windows.Forms.SplitContainer();
+            this.separator2 = new PintoNS.Controls.Separator();
             this.txtSearchBox = new PintoNS.Controls.ModernTextBoxWithPlaceholderSupport();
-            this.tcTabs = new PintoNS.JacksonTabControl.CustomTabControl();
-            this.tpConnecting = new System.Windows.Forms.TabPage();
-            this.lrConnectingLoader = new PintoNS.Controls.Loader();
-            this.lConnectingStatus = new System.Windows.Forms.Label();
-            this.tpContacts = new System.Windows.Forms.TabPage();
+            this.tcLeftSections = new PintoNS.JacksonTabControl.CustomTabControl();
+            this.tpLeftSectionsContacts = new System.Windows.Forms.TabPage();
             this.lContactsNoContacts = new System.Windows.Forms.Label();
             this.dgvContacts = new System.Windows.Forms.DataGridView();
             this.pUserInfo = new System.Windows.Forms.Panel();
@@ -80,7 +80,13 @@ namespace PintoNS
             this.tsmiUserInfoStatusAway = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUserInfoStatusBusy = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUserInfoStatusInvisible = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiUserInfoStatusOffline = new System.Windows.Forms.ToolStripMenuItem();
+            this.tcRightSections = new PintoNS.JacksonTabControl.CustomTabControl();
+            this.tpRightSectionsNews = new System.Windows.Forms.TabPage();
+            this.separator1 = new PintoNS.Controls.Separator();
+            this.label1 = new System.Windows.Forms.Label();
             this.wbPintoNews = new System.Windows.Forms.WebBrowser();
+            this.tpRightSectionsMessaging = new System.Windows.Forms.TabPage();
             this.tConnectingTray = new System.Windows.Forms.Timer(this.components);
             this.tsMenuBar.SuspendLayout();
             this.cmsTray.SuspendLayout();
@@ -88,12 +94,13 @@ namespace PintoNS
             this.scSections.Panel1.SuspendLayout();
             this.scSections.Panel2.SuspendLayout();
             this.scSections.SuspendLayout();
-            this.tcTabs.SuspendLayout();
-            this.tpConnecting.SuspendLayout();
-            this.tpContacts.SuspendLayout();
+            this.tcLeftSections.SuspendLayout();
+            this.tpLeftSectionsContacts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).BeginInit();
             this.pUserInfo.SuspendLayout();
             this.cmsUserInfoStatus.SuspendLayout();
+            this.tcRightSections.SuspendLayout();
+            this.tpRightSectionsNews.SuspendLayout();
             this.SuspendLayout();
             // 
             // ilTabImages
@@ -139,7 +146,8 @@ namespace PintoNS
             this.tsmiMenuBarFileChangeStatusOnline,
             this.tsmiMenuBarFileChangeStatusAway,
             this.tsmiMenuBarFileChangeStatusBusy,
-            this.tsmiMenuBarFileChangeStatusInvisible});
+            this.tsmiMenuBarFileChangeStatusInvisible,
+            this.tsmiMenuBarFileChangeStatusOffline});
             this.tsmiMenuBarFileChangeStatus.Name = "tsmiMenuBarFileChangeStatus";
             this.tsmiMenuBarFileChangeStatus.Size = new System.Drawing.Size(150, 22);
             this.tsmiMenuBarFileChangeStatus.Text = "Change Status";
@@ -150,7 +158,7 @@ namespace PintoNS
             this.tsmiMenuBarFileChangeStatusOnline.Name = "tsmiMenuBarFileChangeStatusOnline";
             this.tsmiMenuBarFileChangeStatusOnline.Size = new System.Drawing.Size(117, 22);
             this.tsmiMenuBarFileChangeStatusOnline.Text = "Online";
-            this.tsmiMenuBarFileChangeStatusOnline.Click += new System.EventHandler(this.tsmiStatusBarStatusOnline_Click);
+            this.tsmiMenuBarFileChangeStatusOnline.Click += new System.EventHandler(this.tsmiUserInfoStatusOnline_Click);
             // 
             // tsmiMenuBarFileChangeStatusAway
             // 
@@ -158,7 +166,7 @@ namespace PintoNS
             this.tsmiMenuBarFileChangeStatusAway.Name = "tsmiMenuBarFileChangeStatusAway";
             this.tsmiMenuBarFileChangeStatusAway.Size = new System.Drawing.Size(117, 22);
             this.tsmiMenuBarFileChangeStatusAway.Text = "Away";
-            this.tsmiMenuBarFileChangeStatusAway.Click += new System.EventHandler(this.tsmiStatusBarStatusAway_Click);
+            this.tsmiMenuBarFileChangeStatusAway.Click += new System.EventHandler(this.tsmiUserInfoStatusAway_Click);
             // 
             // tsmiMenuBarFileChangeStatusBusy
             // 
@@ -166,7 +174,7 @@ namespace PintoNS
             this.tsmiMenuBarFileChangeStatusBusy.Name = "tsmiMenuBarFileChangeStatusBusy";
             this.tsmiMenuBarFileChangeStatusBusy.Size = new System.Drawing.Size(117, 22);
             this.tsmiMenuBarFileChangeStatusBusy.Text = "Busy";
-            this.tsmiMenuBarFileChangeStatusBusy.Click += new System.EventHandler(this.tsmiStatusBarStatusBusy_Click);
+            this.tsmiMenuBarFileChangeStatusBusy.Click += new System.EventHandler(this.tsmiUserInfoStatusBusy_Click);
             // 
             // tsmiMenuBarFileChangeStatusInvisible
             // 
@@ -174,7 +182,15 @@ namespace PintoNS
             this.tsmiMenuBarFileChangeStatusInvisible.Name = "tsmiMenuBarFileChangeStatusInvisible";
             this.tsmiMenuBarFileChangeStatusInvisible.Size = new System.Drawing.Size(117, 22);
             this.tsmiMenuBarFileChangeStatusInvisible.Text = "Invisible";
-            this.tsmiMenuBarFileChangeStatusInvisible.Click += new System.EventHandler(this.tsmiStatusBarStatusInvisible_Click);
+            this.tsmiMenuBarFileChangeStatusInvisible.Click += new System.EventHandler(this.tsmiUserInfoStatusInvisible_Click);
+            // 
+            // tsmiMenuBarFileChangeStatusOffline
+            // 
+            this.tsmiMenuBarFileChangeStatusOffline.Image = global::PintoNS.Statuses.INVISIBLE;
+            this.tsmiMenuBarFileChangeStatusOffline.Name = "tsmiMenuBarFileChangeStatusOffline";
+            this.tsmiMenuBarFileChangeStatusOffline.Size = new System.Drawing.Size(117, 22);
+            this.tsmiMenuBarFileChangeStatusOffline.Text = "Offline";
+            this.tsmiMenuBarFileChangeStatusOffline.Click += new System.EventHandler(this.tsmiUserInfoStatusOffline_Click);
             // 
             // toolStripSeparator3
             // 
@@ -308,7 +324,8 @@ namespace PintoNS
             this.tsmiTrayChangeStatusOnline,
             this.tsmiTrayChangeStatusAway,
             this.tsmiTrayChangeStatusBusy,
-            this.tsmiTrayChangeStatusInvisible});
+            this.tsmiTrayChangeStatusInvisible,
+            this.tsmiTrayChangeStatusOffline});
             this.tsmiTrayChangeStatus.Name = "tsmiTrayChangeStatus";
             this.tsmiTrayChangeStatus.Size = new System.Drawing.Size(125, 22);
             this.tsmiTrayChangeStatus.Text = "Change Status";
@@ -319,7 +336,7 @@ namespace PintoNS
             this.tsmiTrayChangeStatusOnline.Name = "tsmiTrayChangeStatusOnline";
             this.tsmiTrayChangeStatusOnline.Size = new System.Drawing.Size(117, 22);
             this.tsmiTrayChangeStatusOnline.Text = "Online";
-            this.tsmiTrayChangeStatusOnline.Click += new System.EventHandler(this.tsmiStatusBarStatusOnline_Click);
+            this.tsmiTrayChangeStatusOnline.Click += new System.EventHandler(this.tsmiUserInfoStatusOnline_Click);
             // 
             // tsmiTrayChangeStatusAway
             // 
@@ -327,7 +344,7 @@ namespace PintoNS
             this.tsmiTrayChangeStatusAway.Name = "tsmiTrayChangeStatusAway";
             this.tsmiTrayChangeStatusAway.Size = new System.Drawing.Size(117, 22);
             this.tsmiTrayChangeStatusAway.Text = "Away";
-            this.tsmiTrayChangeStatusAway.Click += new System.EventHandler(this.tsmiStatusBarStatusAway_Click);
+            this.tsmiTrayChangeStatusAway.Click += new System.EventHandler(this.tsmiUserInfoStatusAway_Click);
             // 
             // tsmiTrayChangeStatusBusy
             // 
@@ -335,7 +352,7 @@ namespace PintoNS
             this.tsmiTrayChangeStatusBusy.Name = "tsmiTrayChangeStatusBusy";
             this.tsmiTrayChangeStatusBusy.Size = new System.Drawing.Size(117, 22);
             this.tsmiTrayChangeStatusBusy.Text = "Busy";
-            this.tsmiTrayChangeStatusBusy.Click += new System.EventHandler(this.tsmiStatusBarStatusBusy_Click);
+            this.tsmiTrayChangeStatusBusy.Click += new System.EventHandler(this.tsmiUserInfoStatusBusy_Click);
             // 
             // tsmiTrayChangeStatusInvisible
             // 
@@ -343,7 +360,15 @@ namespace PintoNS
             this.tsmiTrayChangeStatusInvisible.Name = "tsmiTrayChangeStatusInvisible";
             this.tsmiTrayChangeStatusInvisible.Size = new System.Drawing.Size(117, 22);
             this.tsmiTrayChangeStatusInvisible.Text = "Invisible";
-            this.tsmiTrayChangeStatusInvisible.Click += new System.EventHandler(this.tsmiStatusBarStatusInvisible_Click);
+            this.tsmiTrayChangeStatusInvisible.Click += new System.EventHandler(this.tsmiUserInfoStatusInvisible_Click);
+            // 
+            // tsmiTrayChangeStatusOffline
+            // 
+            this.tsmiTrayChangeStatusOffline.Image = global::PintoNS.Statuses.INVISIBLE;
+            this.tsmiTrayChangeStatusOffline.Name = "tsmiTrayChangeStatusOffline";
+            this.tsmiTrayChangeStatusOffline.Size = new System.Drawing.Size(117, 22);
+            this.tsmiTrayChangeStatusOffline.Text = "Offline";
+            this.tsmiTrayChangeStatusOffline.Click += new System.EventHandler(this.tsmiUserInfoStatusOffline_Click);
             // 
             // tsmiTrayExit
             // 
@@ -362,21 +387,31 @@ namespace PintoNS
             // scSections.Panel1
             // 
             this.scSections.Panel1.BackColor = System.Drawing.SystemColors.Window;
+            this.scSections.Panel1.Controls.Add(this.separator2);
             this.scSections.Panel1.Controls.Add(this.txtSearchBox);
-            this.scSections.Panel1.Controls.Add(this.tcTabs);
+            this.scSections.Panel1.Controls.Add(this.tcLeftSections);
             this.scSections.Panel1.Controls.Add(this.pUserInfo);
             this.scSections.Panel1MinSize = 250;
             // 
             // scSections.Panel2
             // 
             this.scSections.Panel2.BackColor = System.Drawing.SystemColors.Window;
-            this.scSections.Panel2.Controls.Add(this.wbPintoNews);
+            this.scSections.Panel2.Controls.Add(this.tcRightSections);
             this.scSections.Panel2MinSize = 500;
             this.scSections.Size = new System.Drawing.Size(899, 554);
             this.scSections.SplitterDistance = 250;
             this.scSections.SplitterWidth = 2;
             this.scSections.TabIndex = 9;
             this.scSections.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.scSections_SplitterMoved);
+            // 
+            // separator2
+            // 
+            this.separator2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.separator2.Location = new System.Drawing.Point(8, 28);
+            this.separator2.Name = "separator2";
+            this.separator2.Size = new System.Drawing.Size(238, 2);
+            this.separator2.TabIndex = 2;
             // 
             // txtSearchBox
             // 
@@ -394,91 +429,58 @@ namespace PintoNS
             this.txtSearchBox.TextForeColor = System.Drawing.Color.Black;
             this.txtSearchBox.TextChanged2 += new System.EventHandler(this.txtSearchBox_TextChanged2);
             // 
-            // tcTabs
+            // tcLeftSections
             // 
-            this.tcTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tcLeftSections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tcTabs.Controls.Add(this.tpConnecting);
-            this.tcTabs.Controls.Add(this.tpContacts);
+            this.tcLeftSections.Controls.Add(this.tpLeftSectionsContacts);
             // 
             // 
             // 
-            this.tcTabs.DisplayStyleProvider.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.tcTabs.DisplayStyleProvider.BorderColorHot = System.Drawing.SystemColors.ControlDark;
-            this.tcTabs.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
-            this.tcTabs.DisplayStyleProvider.CloserColor = System.Drawing.Color.Empty;
-            this.tcTabs.DisplayStyleProvider.FocusTrack = true;
-            this.tcTabs.DisplayStyleProvider.HotTrack = true;
-            this.tcTabs.DisplayStyleProvider.IgnoreImageOnTextDraw = false;
-            this.tcTabs.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tcTabs.DisplayStyleProvider.Opacity = 1F;
-            this.tcTabs.DisplayStyleProvider.Overlap = 0;
-            this.tcTabs.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
-            this.tcTabs.DisplayStyleProvider.ShowTabCloser = false;
-            this.tcTabs.DisplayStyleProvider.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.tcTabs.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
-            this.tcTabs.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
-            this.tcTabs.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
-            this.tcTabs.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tcTabs.HotTrack = true;
-            this.tcTabs.ImageList = this.ilTabImages;
-            this.tcTabs.Location = new System.Drawing.Point(4, 59);
-            this.tcTabs.Name = "tcTabs";
-            this.tcTabs.SelectedIndex = 0;
-            this.tcTabs.Size = new System.Drawing.Size(246, 494);
-            this.tcTabs.TabIndex = 2;
+            this.tcLeftSections.DisplayStyleProvider.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.tcLeftSections.DisplayStyleProvider.BorderColorHot = System.Drawing.SystemColors.ControlDark;
+            this.tcLeftSections.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
+            this.tcLeftSections.DisplayStyleProvider.CloserColor = System.Drawing.Color.Empty;
+            this.tcLeftSections.DisplayStyleProvider.FocusTrack = true;
+            this.tcLeftSections.DisplayStyleProvider.HotTrack = true;
+            this.tcLeftSections.DisplayStyleProvider.IgnoreImageOnTextDraw = false;
+            this.tcLeftSections.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tcLeftSections.DisplayStyleProvider.Opacity = 1F;
+            this.tcLeftSections.DisplayStyleProvider.Overlap = 0;
+            this.tcLeftSections.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
+            this.tcLeftSections.DisplayStyleProvider.ShowTabCloser = false;
+            this.tcLeftSections.DisplayStyleProvider.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tcLeftSections.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
+            this.tcLeftSections.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
+            this.tcLeftSections.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
+            this.tcLeftSections.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tcLeftSections.HotTrack = true;
+            this.tcLeftSections.ImageList = this.ilTabImages;
+            this.tcLeftSections.Location = new System.Drawing.Point(4, 59);
+            this.tcLeftSections.Name = "tcLeftSections";
+            this.tcLeftSections.SelectedIndex = 0;
+            this.tcLeftSections.Size = new System.Drawing.Size(246, 494);
+            this.tcLeftSections.TabIndex = 2;
             // 
-            // tpConnecting
+            // tpLeftSectionsContacts
             // 
-            this.tpConnecting.BackColor = System.Drawing.SystemColors.Window;
-            this.tpConnecting.Controls.Add(this.lrConnectingLoader);
-            this.tpConnecting.Controls.Add(this.lConnectingStatus);
-            this.tpConnecting.ImageIndex = 0;
-            this.tpConnecting.Location = new System.Drawing.Point(4, 40);
-            this.tpConnecting.Name = "tpConnecting";
-            this.tpConnecting.Padding = new System.Windows.Forms.Padding(3);
-            this.tpConnecting.Size = new System.Drawing.Size(235, 450);
-            this.tpConnecting.TabIndex = 2;
-            this.tpConnecting.Text = "Connecting";
-            // 
-            // lrConnectingLoader
-            // 
-            this.lrConnectingLoader.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lrConnectingLoader.Location = new System.Drawing.Point(59, 175);
-            this.lrConnectingLoader.MaximumSize = new System.Drawing.Size(122, 107);
-            this.lrConnectingLoader.MinimumSize = new System.Drawing.Size(122, 107);
-            this.lrConnectingLoader.Name = "lrConnectingLoader";
-            this.lrConnectingLoader.Size = new System.Drawing.Size(122, 107);
-            this.lrConnectingLoader.TabIndex = 2;
-            // 
-            // lConnectingStatus
-            // 
-            this.lConnectingStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lConnectingStatus.Location = new System.Drawing.Point(56, 150);
-            this.lConnectingStatus.Name = "lConnectingStatus";
-            this.lConnectingStatus.Size = new System.Drawing.Size(128, 16);
-            this.lConnectingStatus.TabIndex = 1;
-            this.lConnectingStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tpContacts
-            // 
-            this.tpContacts.BackColor = System.Drawing.SystemColors.Window;
-            this.tpContacts.Controls.Add(this.lContactsNoContacts);
-            this.tpContacts.Controls.Add(this.dgvContacts);
-            this.tpContacts.ImageIndex = 1;
-            this.tpContacts.Location = new System.Drawing.Point(4, 40);
-            this.tpContacts.Name = "tpContacts";
-            this.tpContacts.Padding = new System.Windows.Forms.Padding(3);
-            this.tpContacts.Size = new System.Drawing.Size(238, 450);
-            this.tpContacts.TabIndex = 1;
-            this.tpContacts.Text = "Contacts";
+            this.tpLeftSectionsContacts.BackColor = System.Drawing.SystemColors.Window;
+            this.tpLeftSectionsContacts.Controls.Add(this.lContactsNoContacts);
+            this.tpLeftSectionsContacts.Controls.Add(this.dgvContacts);
+            this.tpLeftSectionsContacts.ImageIndex = 1;
+            this.tpLeftSectionsContacts.Location = new System.Drawing.Point(4, 40);
+            this.tpLeftSectionsContacts.Name = "tpLeftSectionsContacts";
+            this.tpLeftSectionsContacts.Padding = new System.Windows.Forms.Padding(3);
+            this.tpLeftSectionsContacts.Size = new System.Drawing.Size(238, 450);
+            this.tpLeftSectionsContacts.TabIndex = 1;
+            this.tpLeftSectionsContacts.Text = "Contacts";
             // 
             // lContactsNoContacts
             // 
             this.lContactsNoContacts.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lContactsNoContacts.AutoSize = true;
-            this.lContactsNoContacts.Location = new System.Drawing.Point(62, 20);
+            this.lContactsNoContacts.Location = new System.Drawing.Point(60, 20);
             this.lContactsNoContacts.Name = "lContactsNoContacts";
             this.lContactsNoContacts.Size = new System.Drawing.Size(112, 13);
             this.lContactsNoContacts.TabIndex = 1;
@@ -526,10 +528,10 @@ namespace PintoNS
             // lUserInfoName
             // 
             this.lUserInfoName.AutoSize = true;
-            this.lUserInfoName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lUserInfoName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lUserInfoName.Location = new System.Drawing.Point(46, 7);
             this.lUserInfoName.Name = "lUserInfoName";
-            this.lUserInfoName.Size = new System.Drawing.Size(53, 13);
+            this.lUserInfoName.Size = new System.Drawing.Size(62, 13);
             this.lUserInfoName.TabIndex = 9;
             this.lUserInfoName.Text = "PintoUser";
             // 
@@ -539,7 +541,7 @@ namespace PintoNS
             this.mbUserInfoStatus.FlatAppearance.BorderSize = 0;
             this.mbUserInfoStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mbUserInfoStatus.ForeColor = System.Drawing.Color.DimGray;
-            this.mbUserInfoStatus.Image = global::PintoNS.Statuses.CONNECTING;
+            this.mbUserInfoStatus.Image = global::PintoNS.Statuses.OFFLINE;
             this.mbUserInfoStatus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.mbUserInfoStatus.Location = new System.Drawing.Point(3, 1);
             this.mbUserInfoStatus.Menu = this.cmsUserInfoStatus;
@@ -554,10 +556,11 @@ namespace PintoNS
             this.tsmiUserInfoStatusOnline,
             this.tsmiUserInfoStatusAway,
             this.tsmiUserInfoStatusBusy,
-            this.tsmiUserInfoStatusInvisible});
+            this.tsmiUserInfoStatusInvisible,
+            this.tsmiUserInfoStatusOffline});
             this.cmsUserInfoStatus.Name = "cmsUserInfoStatus";
             this.cmsUserInfoStatus.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.cmsUserInfoStatus.Size = new System.Drawing.Size(118, 92);
+            this.cmsUserInfoStatus.Size = new System.Drawing.Size(118, 114);
             // 
             // tsmiUserInfoStatusOnline
             // 
@@ -565,7 +568,7 @@ namespace PintoNS
             this.tsmiUserInfoStatusOnline.Name = "tsmiUserInfoStatusOnline";
             this.tsmiUserInfoStatusOnline.Size = new System.Drawing.Size(117, 22);
             this.tsmiUserInfoStatusOnline.Text = "Online";
-            this.tsmiUserInfoStatusOnline.Click += new System.EventHandler(this.tsmiStatusBarStatusOnline_Click);
+            this.tsmiUserInfoStatusOnline.Click += new System.EventHandler(this.tsmiUserInfoStatusOnline_Click);
             // 
             // tsmiUserInfoStatusAway
             // 
@@ -573,7 +576,7 @@ namespace PintoNS
             this.tsmiUserInfoStatusAway.Name = "tsmiUserInfoStatusAway";
             this.tsmiUserInfoStatusAway.Size = new System.Drawing.Size(117, 22);
             this.tsmiUserInfoStatusAway.Text = "Away";
-            this.tsmiUserInfoStatusAway.Click += new System.EventHandler(this.tsmiStatusBarStatusAway_Click);
+            this.tsmiUserInfoStatusAway.Click += new System.EventHandler(this.tsmiUserInfoStatusAway_Click);
             // 
             // tsmiUserInfoStatusBusy
             // 
@@ -581,7 +584,7 @@ namespace PintoNS
             this.tsmiUserInfoStatusBusy.Name = "tsmiUserInfoStatusBusy";
             this.tsmiUserInfoStatusBusy.Size = new System.Drawing.Size(117, 22);
             this.tsmiUserInfoStatusBusy.Text = "Busy";
-            this.tsmiUserInfoStatusBusy.Click += new System.EventHandler(this.tsmiStatusBarStatusBusy_Click);
+            this.tsmiUserInfoStatusBusy.Click += new System.EventHandler(this.tsmiUserInfoStatusBusy_Click);
             // 
             // tsmiUserInfoStatusInvisible
             // 
@@ -589,18 +592,102 @@ namespace PintoNS
             this.tsmiUserInfoStatusInvisible.Name = "tsmiUserInfoStatusInvisible";
             this.tsmiUserInfoStatusInvisible.Size = new System.Drawing.Size(117, 22);
             this.tsmiUserInfoStatusInvisible.Text = "Invisible";
-            this.tsmiUserInfoStatusInvisible.Click += new System.EventHandler(this.tsmiStatusBarStatusInvisible_Click);
+            this.tsmiUserInfoStatusInvisible.Click += new System.EventHandler(this.tsmiUserInfoStatusInvisible_Click);
+            // 
+            // tsmiUserInfoStatusOffline
+            // 
+            this.tsmiUserInfoStatusOffline.Image = global::PintoNS.Statuses.OFFLINE;
+            this.tsmiUserInfoStatusOffline.Name = "tsmiUserInfoStatusOffline";
+            this.tsmiUserInfoStatusOffline.Size = new System.Drawing.Size(117, 22);
+            this.tsmiUserInfoStatusOffline.Text = "Offline";
+            this.tsmiUserInfoStatusOffline.Click += new System.EventHandler(this.tsmiUserInfoStatusOffline_Click);
+            // 
+            // tcRightSections
+            // 
+            this.tcRightSections.Controls.Add(this.tpRightSectionsNews);
+            this.tcRightSections.Controls.Add(this.tpRightSectionsMessaging);
+            // 
+            // 
+            // 
+            this.tcRightSections.DisplayStyleProvider.BorderColor = System.Drawing.SystemColors.Window;
+            this.tcRightSections.DisplayStyleProvider.BorderColorHot = System.Drawing.SystemColors.Window;
+            this.tcRightSections.DisplayStyleProvider.BorderColorSelected = System.Drawing.SystemColors.Window;
+            this.tcRightSections.DisplayStyleProvider.CloserColor = System.Drawing.Color.Empty;
+            this.tcRightSections.DisplayStyleProvider.FocusTrack = true;
+            this.tcRightSections.DisplayStyleProvider.HotTrack = true;
+            this.tcRightSections.DisplayStyleProvider.IgnoreImageOnTextDraw = false;
+            this.tcRightSections.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tcRightSections.DisplayStyleProvider.Opacity = 1F;
+            this.tcRightSections.DisplayStyleProvider.Overlap = 0;
+            this.tcRightSections.DisplayStyleProvider.Padding = new System.Drawing.Point(0, 0);
+            this.tcRightSections.DisplayStyleProvider.ShowTabCloser = false;
+            this.tcRightSections.DisplayStyleProvider.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tcRightSections.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
+            this.tcRightSections.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
+            this.tcRightSections.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
+            this.tcRightSections.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcRightSections.HotTrack = true;
+            this.tcRightSections.Location = new System.Drawing.Point(0, 0);
+            this.tcRightSections.Name = "tcRightSections";
+            this.tcRightSections.SelectedIndex = 0;
+            this.tcRightSections.Size = new System.Drawing.Size(647, 554);
+            this.tcRightSections.TabIndex = 0;
+            // 
+            // tpRightSectionsNews
+            // 
+            this.tpRightSectionsNews.BackColor = System.Drawing.SystemColors.Window;
+            this.tpRightSectionsNews.Controls.Add(this.separator1);
+            this.tpRightSectionsNews.Controls.Add(this.label1);
+            this.tpRightSectionsNews.Controls.Add(this.wbPintoNews);
+            this.tpRightSectionsNews.Location = new System.Drawing.Point(4, 23);
+            this.tpRightSectionsNews.Name = "tpRightSectionsNews";
+            this.tpRightSectionsNews.Padding = new System.Windows.Forms.Padding(3);
+            this.tpRightSectionsNews.Size = new System.Drawing.Size(639, 527);
+            this.tpRightSectionsNews.TabIndex = 0;
+            this.tpRightSectionsNews.Text = "News";
+            // 
+            // separator1
+            // 
+            this.separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.separator1.Location = new System.Drawing.Point(6, 28);
+            this.separator1.Name = "separator1";
+            this.separator1.Size = new System.Drawing.Size(627, 2);
+            this.separator1.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(106, 19);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Pinto! News";
             // 
             // wbPintoNews
             // 
-            this.wbPintoNews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wbPintoNews.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.wbPintoNews.IsWebBrowserContextMenuEnabled = false;
-            this.wbPintoNews.Location = new System.Drawing.Point(0, 0);
+            this.wbPintoNews.Location = new System.Drawing.Point(3, 36);
             this.wbPintoNews.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbPintoNews.Name = "wbPintoNews";
-            this.wbPintoNews.Size = new System.Drawing.Size(647, 554);
+            this.wbPintoNews.Size = new System.Drawing.Size(630, 491);
             this.wbPintoNews.TabIndex = 0;
             this.wbPintoNews.Url = new System.Uri("about:blank", System.UriKind.Absolute);
+            this.wbPintoNews.WebBrowserShortcutsEnabled = false;
+            // 
+            // tpRightSectionsMessaging
+            // 
+            this.tpRightSectionsMessaging.Location = new System.Drawing.Point(4, 23);
+            this.tpRightSectionsMessaging.Name = "tpRightSectionsMessaging";
+            this.tpRightSectionsMessaging.Padding = new System.Windows.Forms.Padding(3);
+            this.tpRightSectionsMessaging.Size = new System.Drawing.Size(639, 527);
+            this.tpRightSectionsMessaging.TabIndex = 1;
+            this.tpRightSectionsMessaging.Text = "Messaging";
+            this.tpRightSectionsMessaging.UseVisualStyleBackColor = true;
             // 
             // tConnectingTray
             // 
@@ -627,29 +714,29 @@ namespace PintoNS
             this.scSections.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scSections)).EndInit();
             this.scSections.ResumeLayout(false);
-            this.tcTabs.ResumeLayout(false);
-            this.tpConnecting.ResumeLayout(false);
-            this.tpContacts.ResumeLayout(false);
-            this.tpContacts.PerformLayout();
+            this.tcLeftSections.ResumeLayout(false);
+            this.tpLeftSectionsContacts.ResumeLayout(false);
+            this.tpLeftSectionsContacts.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).EndInit();
             this.pUserInfo.ResumeLayout(false);
             this.pUserInfo.PerformLayout();
             this.cmsUserInfoStatus.ResumeLayout(false);
+            this.tcRightSections.ResumeLayout(false);
+            this.tpRightSectionsNews.ResumeLayout(false);
+            this.tpRightSectionsNews.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        public PintoNS.JacksonTabControl.CustomTabControl tcTabs;
+        public PintoNS.JacksonTabControl.CustomTabControl tcLeftSections;
         public System.Windows.Forms.ImageList ilTabImages;
         public System.Windows.Forms.ToolStripDropDownButton tsddbMenuBarFile;
         public System.Windows.Forms.ToolStripDropDownButton tsddbMenuBarHelp;
-        public System.Windows.Forms.TabPage tpContacts;
+        public System.Windows.Forms.TabPage tpLeftSectionsContacts;
         public System.Windows.Forms.DataGridView dgvContacts;
         public System.Windows.Forms.ToolStripMenuItem tsmiMenuBarFileLogOff;
-        public System.Windows.Forms.TabPage tpConnecting;
-        public System.Windows.Forms.Label lConnectingStatus;
         public System.Windows.Forms.ToolStripMenuItem tsmiMenuBarHelpAbout;
         public System.Windows.Forms.ToolStripMenuItem tsmiMenuBarHelpToggleConsole;
         public System.Windows.Forms.NotifyIcon niTray;
@@ -662,7 +749,6 @@ namespace PintoNS
         public System.Windows.Forms.ToolStripMenuItem tsmiTrayChangeStatusInvisible;
         public System.Windows.Forms.ToolStripMenuItem tsmiMenuBarFileExit;
         public System.Windows.Forms.ToolStripMenuItem tsmiMenuBarHelpCheckForUpdates;
-        public Loader lrConnectingLoader;
         public System.Windows.Forms.ToolStripDropDownButton tsddbMenuBarTools;
         public System.Windows.Forms.ToolStripMenuItem tsmiMenuBarToolsAddContact;
         public System.Windows.Forms.ToolStripMenuItem tsmiMenuBarToolsRemoveContact;
@@ -690,6 +776,15 @@ namespace PintoNS
         private ModernTextBoxWithPlaceholderSupport txtSearchBox;
         public System.Windows.Forms.Label lContactsNoContacts;
         private System.Windows.Forms.Timer tConnectingTray;
+        private System.Windows.Forms.ToolStripMenuItem tsmiUserInfoStatusOffline;
+        public System.Windows.Forms.ToolStripMenuItem tsmiTrayChangeStatusOffline;
+        public System.Windows.Forms.ToolStripMenuItem tsmiMenuBarFileChangeStatusOffline;
+        private PintoNS.JacksonTabControl.CustomTabControl tcRightSections;
+        private System.Windows.Forms.TabPage tpRightSectionsNews;
         private System.Windows.Forms.WebBrowser wbPintoNews;
+        private System.Windows.Forms.TabPage tpRightSectionsMessaging;
+        private System.Windows.Forms.Label label1;
+        private Separator separator1;
+        private Separator separator2;
     }
 }

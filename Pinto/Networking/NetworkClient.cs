@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PintoNS.Networking
 {
@@ -58,8 +59,10 @@ namespace PintoNS.Networking
 
         public void Disconnect(string reason) 
         {
-            bool ignoreDisconnectReasonValue = ignoreDisconnectReason;
+            bool sendEvent = IsConnected && !ignoreDisconnectReason;
+            IsConnected = false;
             ignoreDisconnectReason = true;
+
             if (tcpStream != null) tcpStream.Dispose();
             if (tcpClient != null) tcpClient.Close();
 
@@ -71,34 +74,29 @@ namespace PintoNS.Networking
             tcpBinaryReader = null;
             tcpBinaryWriter = null;
 
-            if (IsConnected && !ignoreDisconnectReasonValue) 
-            {
+            if (sendEvent) 
                 Disconnected.Invoke(reason);
-            }
-            IsConnected = false;
         }
 
         public void SendPacket(IPacket packet) 
         {
             if (!IsConnected) return;
 
+            MemoryStream packetData = new MemoryStream();
+            BinaryWriter packetDataWriter = new BinaryWriter(packetData);
+
             lock (sendLock)
             {
-                // Header
-                tcpBinaryWriter.Write(Encoding.ASCII.GetBytes("PMSG"));
+                packetDataWriter.Write(Encoding.ASCII.GetBytes("PMSG"));
+                packetDataWriter.WriteBE(packet.GetID());
+                packet.Write(packetDataWriter);
 
-                // Size
-                tcpBinaryWriter.WriteBE(packet.GetSize());
-
-                // ID
-                tcpBinaryWriter.WriteBE(packet.GetID());
-
-                if (packet.GetSize() > 0) 
-                {
-                    // Data
-                    packet.Write(tcpBinaryWriter);
-                    tcpBinaryWriter.Flush();
-                }
+                packetData.Flush();
+                packetData.WriteTo(tcpStream);
+                packetData.Dispose();
+                packetDataWriter.Dispose();
+                
+                tcpStream.Flush();
             }
 
             if (packet.GetID() != 255)
@@ -130,27 +128,20 @@ namespace PintoNS.Networking
                         headerPart3 != 0x47)
                         throw new ConnectionException("Bad packet header!");
 
-                    int size = tcpBinaryReader.ReadBEInt();
                     int id = tcpBinaryReader.ReadBEInt();
                     IPacket packet = Packets.GetPacketByID(id);
 
                     if (packet == null)
                         throw new ConnectionException($"Bad packet ID: {id}");
 
-                    if (size > 0) 
-                    {
-                        byte[] data = tcpBinaryReader.ReadBytes(size);
-                        BinaryReader tempReader = new BinaryReader(new MemoryStream(data));
-                        packet.Read(tempReader);
-                        tempReader.Close();
-                        tempReader.Dispose();
-                    }
-
+                    packet.Read(tcpBinaryReader);
                     ReceivedPacket.Invoke(packet);
                     Thread.Sleep(1);
                 }
                 catch (Exception ex)
                 {
+                    if (!IsConnected) return;
+
                     if (!(ex is IOException || ex is ConnectionException))
                     {
                         Disconnect($"Internal error -> {ex.Message}");
@@ -165,7 +156,6 @@ namespace PintoNS.Networking
                     {
                         Disconnect(ex.Message);
                     }
-                    return;
                 }
             }
         }
